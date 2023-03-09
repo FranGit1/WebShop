@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col-md-4 p-3">
+    <form
+      class="signin-form"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      (submit)="onRegister()"
+      [formGroup]="registerForm"
+    >
+      <fieldset class="form-group">
+        <label>Username</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="username"
+          placeholder="Username"
+        />
+      </fieldset>
+      <small
+        class="text-danger"
+        *ngIf="
+          registerForm.get('username')?.errors &&
+          !registerForm.get('username')?.pristine
+        "
+        >Username must conatin min. 4 characters <br
+      /></small>
+      <fieldset class="form-group">
+        <label>Password</label>
+
+        <input
+          class="form-control"
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+        />
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label>Repeat password</label>
+
+        <input
+          class="form-control"
+          type="password"
+          formControlName="repeatPassword"
+          placeholder="Repeat password"
+        />
+      </fieldset>
+      <small
+        class="text-danger"
+        *ngIf="
+          registerForm.get('repeatPassword')?.hasError('matching') &&
+          registerForm.get('repeatPassword')?.touched
+        "
+      >
+        Password must match.
+      </small>
+      <fieldset class="form-group">
+        <label>Name</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="name"
+          placeholder="Name"
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <label>E-mail</label>
+        <input
+          class="form-control"
+          type="email"
+          formControlName="email"
+          placeholder="E-mail"
+        />
+      </fieldset>
+      <small
+        class="text-danger"
+        *ngIf="
+          registerForm.get('email')?.errors &&
+          !registerForm.get('email')?.pristine
+        "
+        >Email address is invalid<br
+      /></small>
+      <div *ngIf="error" class="text-danger">Passwords doesnt match!</div>
+      <button
+        class="btn btn-success mt-2"
+        type="submit"
+        [disabled]="registerForm.invalid"
+      >
+        Register
+      </button>
+      <br />
+      <br />
+      <a style="text-decoration: none" [routerLink]="['..']"
+        >Back to login form</a
+      >
+    </form>
+  </div>
+</div>

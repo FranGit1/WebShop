@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-4 p-3">
+    <form
+      class="signin-form"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      (submit)="onLogin()"
+      [formGroup]="signinForm"
+    >
+      <fieldset class="form-group">
+        <label>Username</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="username"
+          placeholder="Username"
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Password</label>
+
+        <input
+          class="form-control"
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+        />
+      </fieldset>
+      <button
+        class="btn btn-success mt-2"
+        type="submit"
+        [disabled]="signinForm.invalid"
+      >
+        Login
+      </button>
+      <button class="btn btn-warning mt-2" [routerLink]="['register']">
+        Register
+      </button>
+      <div *ngIf="errorMessage">{{ errorMessage }}</div>
+    </form>
+  </div>
+</div>

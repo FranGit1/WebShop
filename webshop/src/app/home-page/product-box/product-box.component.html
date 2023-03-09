@@ -1,0 +1,44 @@
+<mat-card [ngClass]="{ 'text-center': !fullWidthMode }">
+  <div [ngClass]="{ flex: fullWidthMode }">
+    <div class="flex justify-end">
+      <div>
+        <button
+          *ngIf="checkAuthority()"
+          (click)="onEditProduct()"
+          [routerLink]="['edit']"
+        >
+          <mat-icon class="text-gray-500 px-11"> edit </mat-icon>
+        </button>
+        <button *ngIf="checkAuthority()" (click)="onRemoveProduct()">
+          <mat-icon class="text-gray-500 pr-11"> delete </mat-icon>
+        </button>
+      </div>
+    </div>
+    <img
+      class="mb-1 mx-auto h-[200px]"
+      [ngClass]="{ 'h-200px': !fullWidthMode, 'h-[360px]': fullWidthMode }"
+      [src]="product.image"
+    />
+    <div
+      class="w-full"
+      [ngClass]="{ 'px-8 flex flex-col justify-between': fullWidthMode }"
+    >
+      <div>
+        <h5>{{ product.category }}</h5>
+        <p class="truncate hover:whitespace-normal">{{ product.title }}</p>
+        <p *ngIf="fullWidthMode">{{ product.description }}</p>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-red-400">{{ product.price | currency : "€" }}</span>
+        <div class="div">
+          <button (click)="onAddToFavorites()">
+            <mat-icon class="text-gray-500 pr-11">favorite</mat-icon>
+          </button>
+          <button (click)="onAddToCart()">
+            <mat-icon class="text-gray-500 pr-8">shopping_cart</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>

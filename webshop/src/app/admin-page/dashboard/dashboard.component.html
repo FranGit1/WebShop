@@ -1,0 +1,112 @@
+<mat-card class="max-w-7xl mx-auto">
+  <h1 class="text-lg text-center font-medium">User list</h1>
+  <br />
+  <table class="table table-striped">
+    <tr class="text-lg font-medium">
+      <th>Username</th>
+      <th>Name</th>
+      <th>E-mail</th>
+      <th>Level</th>
+      <th>Change</th>
+      <th>Remove</th>
+    </tr>
+    <tr *ngFor="let u of users">
+      <th>{{ u.username }}</th>
+      <th>{{ u.name }}</th>
+      <th>{{ u.email }}</th>
+      <th>{{ u.role == 2 ? "Admin" : "User" }}</th>
+      <th>
+        <button mat-raised-button color="primary" (click)="changeLevel(u)">
+          Change
+        </button>
+      </th>
+      <th>
+        <button mat-raised-button color="warn" (click)="deleteUser(u)">
+          Remove
+        </button>
+      </th>
+    </tr>
+  </table>
+  <br />
+  <br />
+  <br />
+  <h1 class="text-lg text-center font-medium">Add new product</h1>
+  <br />
+  <div class="">
+    <form
+      class="form-group"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      (submit)="onAddProduct()"
+      [formGroup]="newProductForm"
+    >
+      <fieldset class="form-group">
+        <label>Title</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="title"
+          placeholder="Title"
+        />
+      </fieldset>
+      <small
+        class="text-danger"
+        *ngIf="
+          newProductForm.get('username')?.errors &&
+          !newProductForm.get('username')?.pristine
+        "
+        >Title must conatin min. 2 characters <br
+      /></small>
+      <fieldset class="form-group">
+        <label>Price</label>
+
+        <input
+          class="form-control"
+          type="number"
+          formControlName="price"
+          placeholder="Price €"
+        />
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label>Category</label>
+
+        <input
+          class="form-control"
+          type="text"
+          formControlName="category"
+          placeholder="Category"
+        />
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label>Description</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="description"
+          placeholder="Description"
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Image url</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="image"
+          placeholder="Image url"
+        />
+      </fieldset>
+
+      <button
+        class="btn btn-success mt-2"
+        type="submit"
+        [disabled]="newProductForm.invalid"
+      >
+        Add new product
+      </button>
+      <br />
+      <br />
+    </form>
+  </div>
+</mat-card>
